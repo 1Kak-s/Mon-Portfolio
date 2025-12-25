@@ -32,7 +32,7 @@ function Hero() {
             {/* tags des techno */}
 
             <div className="flex flex-wrap justify-center gap-3 mb-12">
-                {["React", "Node.js", "Python", "Unity VR", "NestJS", "TailwindCSS"].map((tech) => (
+                {["React", "Node.js", "Python", "Unity VR", "NestJS", "TailwindCSS", "n8n"].map((tech) => (
                     <span 
                     key={tech}
                     className="px-3 py-1 bg-slate-700/50 rounded-full text-gray-300 text-sm hover:bg-rose-500/20 hover:text-rose-300 transition-all duration-300">
@@ -41,7 +41,7 @@ function Hero() {
                 ))}
             </div>
 
-              {/* Boutons CTA (Call To Action) */}
+              {/* Boutons Call To Action */}
         <div className="flex flex-wrap justify-center gap-4">
         <button
             onClick={() => scrollTo('projects')}
