@@ -11,7 +11,7 @@ function Navbar() {
 
         window.addEventListener("scroll", handleScroll);
         return () => {
-            window.addEventListener("scroll", handleScroll);
+            window.removeEventListener("scroll", handleScroll);
         };
     }, []);
 
