@@ -56,3 +56,39 @@ function Navbar() {
             </button>
         ))}
     </div>
+
+    {/* Bouton menu pour mobile */}
+
+    <button
+        className="md:hidden text-white p-2"
+        onClick={() => setMenuOpen(!menuOpen)}>
+
+        <div className={`w-6 h-0.5 bg-white transition-all duration-300 ${
+            menuOpen ? 'rotate-45 translate-y-1.5' : ''
+        }`} />
+        <div className={`w-6 h-0.5 bg-white my-1.5 transition-all duration-300 ${
+            menuOpen ? 'opacity-0' : ''
+        }`} />
+        <div className={`w-6 h-0.5 bg-white transition-all duration-300 ${
+            menuOpen ? '-rotate-45 -translate-y-1.5' : ''
+        }`} />
+        </button>
+        </div>
+
+        {/* Menu pour mobile */}
+        <div className={`md:hidden absolute top-full left-0 right-0 bg-slate-900/98 backdrop-blur-md transition-all duration-500 overflow-hidden ${
+        menuOpen ? 'max-h-96 border-t border-slate-700' : 'max-h-0'}`}>
+        {navItems.map((item) => (
+        <button
+            key={item.id}
+            onClick={() => scrollTo(item.id)}
+            className="block w-full text-left px-6 py-4 text-gray-300 hover:text-rose-400 hover:bg-slate-800/50 transition-all">
+            {item.label}
+        </button>
+        ))}
+        </div>
+    </nav>
+)
+}
+
+export default Navbar;
