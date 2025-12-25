@@ -1,4 +1,5 @@
 import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
 
 function App() {
   return (
@@ -7,6 +8,7 @@ function App() {
 
 
       <main>
+        <Hero />
 
         <section className="h-screen flex items-center justify-center">
           <h1 className="text-5xl font-bold"> Maxime <span className="text-rose-500">Goëffier</span></h1>
