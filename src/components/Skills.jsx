@@ -60,8 +60,8 @@ function Skills() {
         title: 'Langages',
         icon: '💻',
         skills: [
-            { name: 'Python', level: 75 },
-            { name: 'JavaScript/TypeScript', level: 70 },
+            { name: 'Python', level: 50 },
+            { name: 'JavaScript/TypeScript', level: 45 },
             { name: 'HTML/CSS', level: 85 },
             { name: 'Bash', level: 60 },
 ]},
@@ -79,7 +79,7 @@ function Skills() {
         title: 'Outils',
         icon: '🛠️',
         skills: [
-            { name: 'Git/GitHub', level: 80 },
+            { name: 'Git/GitHub', level: 60 },
             { name: 'Linux', level: 70 },
             { name: 'n8n', level: 65 },
             { name: 'VS Code', level: 90 },
@@ -108,7 +108,7 @@ return (
             Stack <span className="text-rose-500">Technique</span>
             </h2>
 
-        <p className="text-gray-400 text-lg">Les technologies que j'utilise au quotidien</p>
+        <p className="text-gray-400 text-lg">Les technologies que j'ai étudiées et utilisées</p>
         </div>
 
         {/* Grille des catégories de compétences */}
