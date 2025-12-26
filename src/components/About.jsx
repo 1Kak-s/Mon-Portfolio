@@ -58,7 +58,7 @@ function About() {
         <div className="space-y-6">
             <p className="text-gray-300 text-lg leading-relaxed">
                 Après <span className="text-rose-400 font-semibold">7 ans dans le retail</span> chez Nike et Canada Goose, 
-                j'ai décidé de suivre ma passion pour la technologie en intégrant l'ETNA.
+                j'ai décidé de suivre ma passion pour le développement Web en intégrant l'ETNA.
             </p>
             
             <p className="text-gray-300 text-lg leading-relaxed">
@@ -81,7 +81,7 @@ function About() {
                 <span className="text-rose-500">🎓</span> ETNA 2024-2027
             </div>
                 <div className="flex items-center gap-2 text-gray-400">
-                    <span className="text-rose-500">🎮</span> Gaming (Valorant/TFT)
+                    <span className="text-rose-500">🎮</span> Gaming (Valorant/TFT/ Counter-Strike)
                 </div>
             </div>
         </div>
