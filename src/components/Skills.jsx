@@ -58,7 +58,7 @@ function Skills() {
     const skillCategories = [
     {
         title: 'Langages',
-        icon: '</>',
+        icon: '💻',
         skills: [
             { name: 'Python', level: 50 },
             { name: 'JavaScript/TypeScript', level: 45 },
