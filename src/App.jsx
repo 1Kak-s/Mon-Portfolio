@@ -4,6 +4,7 @@ import About from "./components/About";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Experience from "./components/Experience";
+import Contact from "./components/Contact";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Skills />
         <Projects />
         <Experience />
+        <Contact />
 
         <section className="h-screen flex items-center justify-center">
           <h1 className="text-5xl font-bold"> Maxime <span className="text-rose-500">Goëffier</span></h1>
