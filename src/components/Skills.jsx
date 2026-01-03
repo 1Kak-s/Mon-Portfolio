@@ -62,8 +62,8 @@ function Skills() {
         skills: [
             { name: 'Python', level: 50 },
             { name: 'JavaScript/TypeScript', level: 45 },
-            { name: 'HTML/CSS', level: 85 },
-            { name: 'Bash', level: 60 },
+            { name: 'HTML/CSS', level: 70 },
+            { name: 'Bash', level: 45 },
 ]},
 
     {
