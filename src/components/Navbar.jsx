@@ -20,7 +20,7 @@ function Navbar() {
         { id: "about", label: "À propos" },
         { id: "skills", label: "Compétences" },
         { id: "projects", label: "Projets" },
-        { id: "experiences", label: "Expériences" },
+        { id: "parcours", label: "Parcours" },
         { id: "contact", label: "Contact" },
     ]
     // Fonction pour scroll vers uns section spécifique
