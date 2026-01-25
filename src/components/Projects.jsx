@@ -17,9 +17,9 @@ function Projects() {
 
         {
             id: 2,
-            title: "Automatisation n8n",
-            description: "Automatisation de tâches : scraping d\'offres d\'emploi, chatbots intelligents, intégrations API.",
-            tags: ["n8n", "APIs", "Automatisation", "JavaScript"],
+            title: "Documentation protocolaire",
+            description: "Swagger et Postman pour documenter et tester des APIs REST. Avec un frontend React.",
+            tags: ["Swagger", "Postman", "API", "Documentation", "REST", "React"],
             category: "Automation",
             icons: "🤖",
             color: "from-orange-500 to-indigo-600",
@@ -27,9 +27,9 @@ function Projects() {
 
         {
             id: 3,
-            title: "Apps Full-Stack",
-            description: "Applications web avec architecture REST moderne, authentification et base de données.",
-            tags: ["React", "NestJS", "TypeScript"],
+            title: "EtnaFlix",
+            description: "Projet de plateforme de liste de films avec React et API externe.",
+            tags: ["React", "NestJS", "TypeScript", "API"],
             category: "Web Development",
             icons: "🌐",
             color: "from-cyan-500 to-blue-600",
@@ -45,18 +45,29 @@ function Projects() {
             color: "from-green-500 to-teal-600",
         },
 
+
         {
             id: 5,
-            title: "Blue",
-            description: "Création artistique numérique",
-            tags: ["Art", "Digital", "Creative", "Procreate"],
-            category: "Art",
-            icons: "🎨",
+            title: "Task Forge",
+            description: "Projet de gestion de tâches avec React et Firebase.",
+            tags: ["React", "Firebase", "JavaScript", "NestJS"],
+            category: "Web Development",
+            icons: "🛠️",
             color: "from-blue-400 to-blue-600",
         },
 
-        {
+                {
             id: 6,
+            title: "blue",
+            description: "Projet artistique d'un autoportrait",
+            tags: ["Art", "Digital", "Creative", "Procreate"],
+            category: "Art",
+            icons: "🖼️",
+            color: "from-orange-400 to-orange-600",
+        },  
+
+        {
+            id: 7,
             title: "Take Time",
             description: "Projet artistique d'un autoportrait",
             tags: ["Art", "Digital", "Creative", "Procreate"],

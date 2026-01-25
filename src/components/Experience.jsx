@@ -1,3 +1,7 @@
+import etnaLogo from '../assets/companies/etna.png';
+import canadaGooseLogo from '../assets/companies/Canada-Goose-logo.png';
+import nikeLogo from '../assets/companies/nike.png';
+
 function Experience() {
   const experiences = [
     {
@@ -7,7 +11,7 @@ function Experience() {
         location: "Ivry-sur-Seine, France",
         description: "Formation en développement logiciel, couvrant divers langages de programmation, frameworks et méthodologies de développement.",
         type: "formation",
-        icon: "🎓",  
+        logo: etnaLogo,  
     },
     {
         period: "2022 - 2024",
@@ -16,7 +20,7 @@ function Experience() {
         location: "Paris, France",
         description: "Gestion des opérations quotidiennes, supervision du personnel (20+ employés), formation et développement des compétences, gestion des stocks et des relations avec les clients.",
         type: "travail",  
-        icon: "🏬",
+        logo: canadaGooseLogo,
     },
     {
         period: "2019 - 2021",
@@ -25,7 +29,7 @@ function Experience() {
         location: "Paris, France",
         description: "Gestion des stocks, prévention des pertes, organisation des livraisons, développement des processus de sécurité.",
         type: "travail",
-        icon: "📦",
+        logo: nikeLogo,
     },
     {
         period: "2017 - 2019",
@@ -34,7 +38,7 @@ function Experience() {
         location: "Paris, France",
         description: "Service à la clientèle, présentation des produits, assistance aux clients dans leurs choix.",
         type: "travail",
-        icon: "👟",
+        logo: nikeLogo,
     },
 ]
 
@@ -85,20 +89,28 @@ function Experience() {
                         }`}>
                             {exp.period}
                         </span>
-                        <span className="text-3xl">{exp.icon}</span>
-                    </>
-                    ) : (
-                    <>
-                        <span className="text-3xl">{exp.icon}</span>
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                            exp.type === 'formation'
-                            ? 'bg-green-500/20 text-green-400'
-                            : 'bg-rose-500/20 text-rose-400'
-                        }`}>
-                            {exp.period}
-                        </span>
-                    </>
-                    )}
+                        <img 
+            src={exp.logo} 
+            alt={`${exp.company} logo`}
+            className="w-10 h-10 object-contain rounded-lg bg-white/5 p-2"
+        />
+    </>
+) : (
+    <>
+        <img 
+            src={exp.logo} 
+            alt={`${exp.company} logo`}
+            className="w-10 h-10 object-contain rounded-lg bg-white/5 p-2"
+        />
+        <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+            exp.type === 'formation'
+            ? 'bg-green-500/20 text-green-400'
+            : 'bg-rose-500/20 text-rose-400'
+        }`}>
+            {exp.period}
+        </span>
+    </>
+)}
                 </div>
 
                     {/* Titre */}
