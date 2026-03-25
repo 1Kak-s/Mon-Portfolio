@@ -21,7 +21,7 @@ const handleChange = (e) => {
     }))
 }
 
-//  NOUVELLE VERSION avec EmailJS
+
 const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
@@ -128,7 +128,7 @@ return (
                 GitHub
             </a>
             <a 
-                href="" 
+                href="https://www.linkedin.com/in/maxime-go%C3%ABffier-a4b8b7214/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="px-6 py-3 bg-slate-900 rounded-xl text-gray-400 hover:bg-rose-500/20 hover:text-rose-400 transition-all"
