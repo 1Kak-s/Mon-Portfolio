@@ -6,8 +6,20 @@ function Projects() {
     const [frontIndex, setFrontIndex] = useState(0);
 
     const projects = [
+
         {
             id: 1,
+            title: "SubFlow",
+            description: "Un outil de visualisation et d'analyse des abonnements.",
+            category: "Data Visualization",
+            tags: ["React", "Figma", "Tailwind CSS", "Data Visualization"],
+            image: "/src/assets/Projets/Subflow.jpg",
+            color: "from-purple-500 to-indigo-600",
+            github: "",
+        },
+
+        {
+            id: 2,
             title: "Jeu VR",
             description: "Un jeu immersif d'un escaperoom en réalité virtuelle dans un musée.",
             category: "VR",
@@ -17,7 +29,7 @@ function Projects() {
             github: "",
         },
         {
-            id: 2,
+            id: 3,
             title: "Documentation protocolaire",
             description: "Swagger et Postman pour documenter et tester des APIs REST. Avec un frontend React.",
             tags: ["Swagger", "Postman", "API", "Documentation", "REST", "React"],
@@ -28,7 +40,7 @@ function Projects() {
         },
 
         {
-            id: 3,
+            id: 4,
             title: "EtnaFlix",
             description: "Projet de plateforme de liste de films avec React et API externe.",
             tags: ["React", "NestJS", "TypeScript", "API"],
@@ -38,7 +50,7 @@ function Projects() {
             github: "",
         },
         {
-            id: 4,
+            id: 5,
             title: "Site Web WordPress",
             description: "Création de sites web professionnels avec thèmes personnalisés et plugins.",
             tags: ["WordPress", "PHP", "CSS", "SEO"],
@@ -48,7 +60,7 @@ function Projects() {
             github: "",
         },
         {
-            id: 5,
+            id: 6,
             title: "Task Forge",
             description: "Projet de gestion de tâches avec React et Firebase.",
             tags: ["React", "Firebase", "JavaScript", "NestJS"],
@@ -58,7 +70,7 @@ function Projects() {
             github: "https://github.com/1Kak-s/TaskForge",
         },
         {
-            id: 6,
+            id: 7,
             title: "My Hyrule Castle",
             description: "Projet de mini jeu rpg dans l'univers de Zelda. En GO",
             tags: ["Go", "Game Development", "RPG", "Zelda"],
@@ -68,10 +80,10 @@ function Projects() {
             github: "https://github.com/1Kak-s/The-Hyrule-Castle",
         },
         {
-            id: 7,
+            id: 8,
             title: "My Generator Prime",
-            description: "Projet artistique d'un autoportrait.",
-            tags: ["Go", "Game Development", "One piece", "Pixel Art"],
+            description: "Un générateur de prime csv.",
+            tags: ["Go", "Game Development", "One piece", "CSV"],
             category: "Game Development",
             image: "/src/assets/Projets/prime.png",
             color: "from-orange-400 to-orange-600",
@@ -79,7 +91,7 @@ function Projects() {
         },
 
         {
-            id: 8,
+            id: 9,
             title: "Bot Telegram",
             description: "Un bot Telegram pour automatiser des tâches et fournir des informations.",
             tags: ["Telegram Bot API", "Python", "Automation"],
