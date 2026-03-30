@@ -1,12 +1,12 @@
 import { useState } from "react";
 import CardSwap, { Card } from './CardSwap';
+import BorderGlow from './BorderGlow';
 
 function Projects() {
     const [activeFilter, setActiveFilter] = useState("all");
     const [frontIndex, setFrontIndex] = useState(0);
 
     const projects = [
-
         {
             id: 1,
             title: "SubFlow",
@@ -17,7 +17,6 @@ function Projects() {
             color: "from-purple-500 to-indigo-600",
             github: "",
         },
-
         {
             id: 2,
             title: "Jeu VR",
@@ -38,7 +37,6 @@ function Projects() {
             color: "from-orange-500 to-rose-600",
             github: "https://github.com/1Kak-s/Documentation-protocolaire",
         },
-
         {
             id: 4,
             title: "EtnaFlix",
@@ -83,13 +81,12 @@ function Projects() {
             id: 8,
             title: "My Generator Prime",
             description: "Un générateur de prime csv.",
-            tags: ["Go", "Game Development", "One piece", ""],
+            tags: ["Go", "Game Development", "One piece"],
             category: "Game Development",
             image: "/src/assets/Projets/prime.png",
             color: "from-orange-400 to-orange-600",
             github: "https://github.com/1Kak-s/MyGeneratorPrime",
         },
-
         {
             id: 9,
             title: "Bot Telegram",
@@ -99,7 +96,7 @@ function Projects() {
             image: "/src/assets/Projets/bot.png",
             color: "from-gray-500 to-gray-700",
             github: "",
-        }
+        },
     ];
 
     const filters = [
@@ -123,6 +120,7 @@ function Projects() {
 
     const CARD_W = 780;
     const CARD_H = 500;
+    const IMG_H = Math.round(CARD_H * 0.60);
 
     return (
         <section id="projects" className="py-24 bg-slate-800 overflow-x-hidden">
@@ -152,18 +150,50 @@ function Projects() {
                     ))}
                 </div>
 
+                {/* MOBILE : grille simple */}
+                <div className="md:hidden grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {filteredProjects.map(project => (
+                        <div
+                            key={project.id}
+                            onClick={() => project.github && window.open(project.github, '_blank', 'noopener noreferrer')}
+                            className={`bg-slate-900 rounded-2xl overflow-hidden border border-slate-700 ${project.github ? 'cursor-pointer hover:border-rose-500/50 transition-colors' : ''}`}
+                        >
+                            <div className="relative h-44 overflow-hidden">
+                                {project.image ? (
+                                    <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+                                ) : (
+                                    <div className={`w-full h-full bg-gradient-to-br ${project.color}`} />
+                                )}
+                                <span className="absolute top-3 right-3 px-2 py-0.5 bg-black/40 backdrop-blur-sm rounded-full text-white text-xs font-medium">
+                                    {project.category}
+                                </span>
+                            </div>
+                            <div className="p-5">
+                                <h3 className="text-white font-bold text-lg mb-1">{project.title}</h3>
+                                <p className="text-gray-400 text-sm mb-3 line-clamp-2">{project.description}</p>
+                                <div className="flex flex-wrap gap-1.5">
+                                    {project.tags.slice(0, 3).map(tag => (
+                                        <span key={tag} className="px-2 py-0.5 bg-slate-800 rounded-full text-xs text-gray-400 border border-slate-700">{tag}</span>
+                                    ))}
+                                    {project.tags.length > 3 && (
+                                        <span className="px-2 py-0.5 bg-slate-800 rounded-full text-xs text-gray-500 border border-slate-700">+{project.tags.length - 3}</span>
+                                    )}
+                                </div>
+                                {project.github && <p className="text-rose-400 text-xs mt-3 font-medium">Voir le projet →</p>}
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
 
-            {/* Zone principale — full width pour permettre le débordement à droite */}
-            <div className="relative" style={{ paddingTop: '140px' }}>
-
+            {/* DESKTOP : CardSwap */}
+            <div className="relative hidden md:block" style={{ paddingTop: '140px' }}>
                 <div className="max-w-6xl mx-auto px-6">
-                    {/* Rectangle de fond */}
                     <div
                         className="relative flex items-stretch rounded-2xl bg-slate-900/70 border border-slate-700/50 overflow-visible"
                         style={{ minHeight: '420px' }}
                     >
-                        {/* ── Gauche : infos ── */}
+                        {/* Gauche : infos */}
                         <div className="w-5/12 px-12 py-12 flex flex-col justify-center z-10 shrink-0">
                             {frontProject ? (
                                 <>
@@ -192,7 +222,7 @@ function Projects() {
                             )}
                         </div>
 
-                        {/* ── Droite : ancrage CardSwap ── */}
+                        {/* Droite : CardSwap */}
                         <div className="relative flex-1 overflow-visible">
                             {filteredProjects.length > 0 && (
                                 <CardSwap
@@ -212,66 +242,67 @@ function Projects() {
                                     {filteredProjects.map(project => (
                                         <Card
                                             key={project.id}
-                                            customClass="cursor-pointer border-slate-600 bg-slate-900"
+                                            customClass="cursor-pointer"
                                             onClick={() => {
                                                 if (project.github) {
                                                     window.open(project.github, '_blank', 'noopener noreferrer');
                                                 }
                                             }}
                                         >
-                                            {/* Bannière gradient */}
-<div
-    className="relative overflow-hidden"
-    style={{ height: `${Math.round(CARD_H * 0.60)}px` }}
->
-    {project.image ? (
-        <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover"
-        />
-    ) : (
-        // Fallback gradient si pas d'image
-        <div className={`w-full h-full bg-gradient-to-br ${project.color} flex items-center justify-center`}>
-            <span className="text-9xl">{project.icons}</span>
-        </div>
-    )}
-    <span className="absolute top-4 right-4 px-3 py-1 bg-black/30 backdrop-blur-sm rounded-full text-white text-sm font-medium">
-        {project.category}
-    </span>
-</div>
-
-                                            {/* Bas de carte */}
-                                            <div className="px-7 pt-5 pb-5 flex items-start justify-between">
-                                                <div>
-                                                    <h3 className="text-white font-bold text-xl mb-2">{project.title}</h3>
-                                                    <div className="flex flex-wrap gap-2">
-                                                        {project.tags.slice(0, 3).map(tag => (
-                                                            <span key={tag} className="px-3 py-1 bg-slate-800 rounded-full text-xs text-gray-400 border border-slate-700">
-                                                                {tag}
-                                                            </span>
-                                                        ))}
-                                                        {project.tags.length > 3 && (
-                                                            <span className="px-3 py-1 bg-slate-800 rounded-full text-xs text-gray-500 border border-slate-700">
-                                                                +{project.tags.length - 3}
-                                                            </span>
-                                                        )}
-                                                    </div>
+                                            <BorderGlow
+                                                className="w-full h-full"
+                                                edgeSensitivity={30}
+                                                glowColor="350 80 60"
+                                                backgroundColor="#0f172a"
+                                                borderRadius={12}
+                                                glowRadius={40}
+                                                glowIntensity={1.2}
+                                                coneSpread={25}
+                                                animated={false}
+                                                colors={['#f43f5e', '#fb7185', '#6366f1']}
+                                                fillOpacity={0.4}
+                                            >
+                                                {/* Image */}
+                                                <div className="relative overflow-hidden" style={{ height: `${IMG_H}px` }}>
+                                                    {project.image ? (
+                                                        <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+                                                    ) : (
+                                                        <div className={`w-full h-full bg-gradient-to-br ${project.color}`} />
+                                                    )}
+                                                    <span className="absolute top-4 right-4 px-3 py-1 bg-black/30 backdrop-blur-sm rounded-full text-white text-sm font-medium">
+                                                        {project.category}
+                                                    </span>
                                                 </div>
-                                                <span className={`text-2xl mt-1 ${project.github ? 'text-rose-400' : 'text-slate-600'}`}>
-                                                    {project.github ? '→' : ''}
-                                                </span>
-                                            </div>
+                                                {/* Bas de carte */}
+                                                <div className="px-7 pt-5 pb-5 flex items-start justify-between">
+                                                    <div>
+                                                        <h3 className="text-white font-bold text-xl mb-2">{project.title}</h3>
+                                                        <div className="flex flex-wrap gap-2">
+                                                            {project.tags.slice(0, 3).map(tag => (
+                                                                <span key={tag} className="px-3 py-1 bg-slate-800 rounded-full text-xs text-gray-400 border border-slate-700">
+                                                                    {tag}
+                                                                </span>
+                                                            ))}
+                                                            {project.tags.length > 3 && (
+                                                                <span className="px-3 py-1 bg-slate-800 rounded-full text-xs text-gray-500 border border-slate-700">
+                                                                    +{project.tags.length - 3}
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                    <span className={`text-2xl mt-1 ${project.github ? 'text-rose-400' : 'text-slate-600'}`}>
+                                                        {project.github ? '→' : '🔒'}
+                                                    </span>
+                                                </div>
+                                            </BorderGlow>
                                         </Card>
                                     ))}
                                 </CardSwap>
                             )}
                         </div>
-
                     </div>
                 </div>
             </div>
-
         </section>
     );
 }
