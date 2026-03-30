@@ -24,7 +24,7 @@ function Projects() {
             category: "Automation",
             image: "/src/assets/Projets/docproto.png",
             color: "from-orange-500 to-rose-600",
-            github: "",
+            github: "https://github.com/1Kak-s/Documentation-protocolaire",
         },
 
         {
@@ -55,27 +55,27 @@ function Projects() {
             category: "Web Development",
             icons: "",
             color: "from-blue-400 to-blue-600",
-            github: "",
+            github: "https://github.com/1Kak-s/TaskForge",
         },
         {
             id: 6,
             title: "My Hyrule Castle",
-            description: "Proje de mini jeu rpg dans l'univers de Zelda. En GO",
+            description: "Projet de mini jeu rpg dans l'univers de Zelda. En GO",
             tags: ["Go", "Game Development", "RPG", "Zelda"],
             category: "Game Development",
             image: "/src/assets/Projets/hyrule.png",
             color: "from-green-500 to-green-700",
-            github: "",
+            github: "https://github.com/1Kak-s/The-Hyrule-Castle",
         },
         {
             id: 7,
-            title: "Take Time",
+            title: "My Generator Prime",
             description: "Projet artistique d'un autoportrait.",
-            tags: ["Art", "Digital", "Creative", "Procreate"],
-            category: "Art",
-            icons: "",
+            tags: ["Go", "Game Development", "One piece", "Pixel Art"],
+            category: "Game Development",
+            image: "/src/assets/Projets/prime.png",
             color: "from-orange-400 to-orange-600",
-            github: "",
+            github: "https://github.com/1Kak-s/MyGeneratorPrime",
         },
     ];
 
@@ -236,7 +236,7 @@ function Projects() {
                                                     </div>
                                                 </div>
                                                 <span className={`text-2xl mt-1 ${project.github ? 'text-rose-400' : 'text-slate-600'}`}>
-                                                    {project.github ? '→' : '🔒'}
+                                                    {project.github ? '→' : ''}
                                                 </span>
                                             </div>
                                         </Card>
