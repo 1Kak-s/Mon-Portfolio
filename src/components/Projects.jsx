@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import CardSwap, { Card } from './CardSwap';
 import BorderGlow from './BorderGlow';
 
 function Projects() {
     const [activeFilter, setActiveFilter] = useState("all");
     const [frontIndex, setFrontIndex] = useState(0);
+    const cardSwapRef = useRef(null);
 
     const projects = [
         {
@@ -179,7 +180,7 @@ function Projects() {
                                         <span className="px-2 py-0.5 bg-slate-800 rounded-full text-xs text-gray-500 border border-slate-700">+{project.tags.length - 3}</span>
                                     )}
                                 </div>
-                                {project.github && <p className="text-rose-400 text-xs mt-3 font-medium">Voir le projet →</p>}
+                                {project.github && <p className="text-rose-400 text-xs mt-3 font-medium">Voir le projet</p>}
                             </div>
                         </div>
                     ))}
@@ -213,9 +214,26 @@ function Projects() {
                                             </span>
                                         ))}
                                     </div>
-                                    <p className="text-gray-600 text-xs">
-                                        Clique sur la carte pour passer au suivant →
-                                    </p>
+                                    {/* Bouton suivant + lien GitHub */}
+                                    <div className="flex items-center gap-4">
+                                        <button
+                                            onClick={() => cardSwapRef.current && cardSwapRef.current.next()}
+                                            className="flex items-center gap-2 px-5 py-2 rounded-full border border-slate-600 text-gray-400 hover:text-white hover:border-rose-500/60 hover:bg-rose-500/10 transition-all duration-300 text-sm group"
+                                        >
+                                            <span>Projet suivant</span>
+                                            <span className="group-hover:translate-x-1 transition-transform duration-200">{'→'}</span>
+                                        </button>
+                                        {frontProject.github && (
+                                            
+                                                <a href={frontProject.github}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex items-center gap-2 px-5 py-2 rounded-full bg-rose-500 hover:bg-rose-600 text-white transition-all duration-300 text-sm font-medium"
+                                            >
+                                                GitHub {'↗'}
+                                            </a>
+                                        )}
+                                    </div>
                                 </>
                             ) : (
                                 <p className="text-gray-500">Aucun projet dans cette catégorie.</p>
@@ -226,6 +244,7 @@ function Projects() {
                         <div className="relative flex-1 overflow-visible">
                             {filteredProjects.length > 0 && (
                                 <CardSwap
+                                    ref={cardSwapRef}
                                     key={activeFilter}
                                     width={CARD_W}
                                     height={CARD_H}
@@ -235,7 +254,6 @@ function Projects() {
                                     pauseOnHover={true}
                                     skewAmount={3}
                                     easing="elastic"
-                                    clickToAdvance={true}
                                     onCardChange={(i) => setFrontIndex(i)}
                                     containerClassName="absolute bottom-0 right-0 translate-x-[40%] translate-y-[22%] perspective-[1400px] overflow-visible"
                                 >

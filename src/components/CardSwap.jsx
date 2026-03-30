@@ -1,4 +1,5 @@
-import React, { Children, cloneElement, forwardRef, isValidElement, useEffect, useRef } from 'react';
+import React, { Children, cloneElement, forwardRef, isValidElement,
+  useEffect, useImperativeHandle, useRef } from 'react';
 import gsap from 'gsap';
 
 export const Card = forwardRef(({ customClass, ...rest }, ref) => (
@@ -27,7 +28,7 @@ const placeNow = (el, slot, skew) =>
     force3D: true
   });
 
-const CardSwap = ({
+const CardSwap = forwardRef(({
   width = 500,
   height = 400,
   cardDistance = 60,
@@ -37,18 +38,16 @@ const CardSwap = ({
   onCardClick,
   skewAmount = 6,
   easing = 'elastic',
-  clickToAdvance = false,
   containerClassName,
   onCardChange,
   children
-}) => {
+}, ref) => {
   const config = easing === 'elastic'
     ? { ease: 'elastic.out(0.6,0.9)', durDrop: 2, durMove: 2, durReturn: 2, promoteOverlap: 0.9, returnDelay: 0.05 }
     : { ease: 'power1.inOut', durDrop: 0.8, durMove: 0.8, durReturn: 0.8, promoteOverlap: 0.45, returnDelay: 0.2 };
 
   const childArr = Children.toArray(children);
 
-  // Refs stockés dans un useRef — pas de useMemo
   const refsRef = useRef([]);
   if (refsRef.current.length !== childArr.length) {
     refsRef.current = childArr.map((_, i) => refsRef.current[i] ?? React.createRef());
@@ -60,6 +59,14 @@ const CardSwap = ({
   const intervalRef = useRef();
   const swapRef = useRef(null);
   const container = useRef(null);
+
+  useImperativeHandle(ref, () => ({
+    next: () => {
+      clearInterval(intervalRef.current);
+      swapRef.current?.();
+      intervalRef.current = window.setInterval(swapRef.current, delay);
+    }
+  }));
 
   useEffect(() => {
     const total = refs.length;
@@ -123,14 +130,8 @@ const CardSwap = ({
           ref: refs[i],
           style: { width, height, ...(child.props.style ?? {}) },
           onClick: e => {
-            if (clickToAdvance && order.current[0] === i) {
-              clearInterval(intervalRef.current);
-              swapRef.current?.();
-              intervalRef.current = window.setInterval(swapRef.current, delay);
-            } else {
-              child.props.onClick?.(e);
-              onCardClick?.(i);
-            }
+            child.props.onClick?.(e);
+            onCardClick?.(i);
           }
         })
       : child
@@ -143,6 +144,7 @@ const CardSwap = ({
       {rendered}
     </div>
   );
-};
+});
 
+CardSwap.displayName = 'CardSwap';
 export default CardSwap;
