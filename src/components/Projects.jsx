@@ -12,7 +12,7 @@ function Projects() {
             description: "Un jeu immersif d'un escaperoom en réalité virtuelle dans un musée.",
             category: "VR",
             tags: ["Unreal Engine", "C#", "Meta Quest", "VR"],
-            icons: "🎮",
+            image: "/src/assets/Projets/musé.png",
             color: "from-purple-500 to-indigo-600",
             github: "",
         },
@@ -22,7 +22,7 @@ function Projects() {
             description: "Swagger et Postman pour documenter et tester des APIs REST. Avec un frontend React.",
             tags: ["Swagger", "Postman", "API", "Documentation", "REST", "React"],
             category: "Automation",
-            icons: "🤖",
+            image: "",
             color: "from-orange-500 to-rose-600",
             github: "",
         },
@@ -32,7 +32,7 @@ function Projects() {
             description: "Projet de plateforme de liste de films avec React et API externe.",
             tags: ["React", "NestJS", "TypeScript", "API"],
             category: "Web Development",
-            icons: "🌐",
+            image: "/src/assets/Projets/etflix.png",
             color: "from-cyan-500 to-blue-600",
             github: "",
         },
@@ -42,7 +42,7 @@ function Projects() {
             description: "Création de sites web professionnels avec thèmes personnalisés et plugins.",
             tags: ["WordPress", "PHP", "CSS", "SEO"],
             category: "Web Development",
-            icons: "🖥️",
+            image: "/src/assets/Projets/MGSTUDIO.png",
             color: "from-green-500 to-teal-600",
             github: "",
         },
@@ -52,7 +52,7 @@ function Projects() {
             description: "Projet de gestion de tâches avec React et Firebase.",
             tags: ["React", "Firebase", "JavaScript", "NestJS"],
             category: "Web Development",
-            icons: "🛠️",
+            icons: "",
             color: "from-blue-400 to-blue-600",
             github: "",
         },
@@ -62,7 +62,7 @@ function Projects() {
             description: "Projet artistique d'un autoportrait.",
             tags: ["Art", "Digital", "Creative", "Procreate"],
             category: "Art",
-            icons: "🖼️",
+            icons: "",
             color: "from-sky-400 to-blue-600",
             github: "",
         },
@@ -72,7 +72,7 @@ function Projects() {
             description: "Projet artistique d'un autoportrait.",
             tags: ["Art", "Digital", "Creative", "Procreate"],
             category: "Art",
-            icons: "🎨",
+            icons: "",
             color: "from-orange-400 to-orange-600",
             github: "",
         },
@@ -90,16 +90,18 @@ function Projects() {
         ? projects
         : projects.filter(p => p.category === activeFilter);
 
-    // Le projet affiché à gauche = celui dont l'index est devant dans CardSwap
     const frontProject = filteredProjects[frontIndex] ?? filteredProjects[0];
 
     const handleFilterChange = (id) => {
         setActiveFilter(id);
-        setFrontIndex(0); // reset quand on change de filtre
+        setFrontIndex(0);
     };
 
+    const CARD_W = 780;
+    const CARD_H = 500;
+
     return (
-        <section id="projects" className="py-24 bg-slate-800">
+        <section id="projects" className="py-24 bg-slate-800 overflow-x-hidden">
             <div className="max-w-6xl mx-auto px-6">
 
                 {/* Titre */}
@@ -111,7 +113,7 @@ function Projects() {
                 </div>
 
                 {/* Filtres */}
-                <div className="flex flex-wrap justify-center gap-3 mb-16">
+                <div className="flex flex-wrap justify-center gap-3 mb-12">
                     {filters.map(filter => (
                         <button
                             key={filter.id}
@@ -126,104 +128,126 @@ function Projects() {
                     ))}
                 </div>
 
-                {/* Layout : texte gauche + cartes droite */}
-                <div
-                    className="relative flex items-center overflow-hidden rounded-2xl bg-slate-900/60 border border-slate-700/50"
-                    style={{ height: '380px' }}
-                >
-                    {/* Côté gauche — infos du projet en avant */}
-                    <div className="w-1/2 px-12 py-10 flex flex-col justify-center z-10">
-                        {frontProject ? (
-                            <>
-                                <span className="text-xs font-semibold uppercase tracking-widest text-rose-400 mb-3">
-                                    {frontProject.category}
-                                </span>
-                                <h3 className="text-3xl font-bold text-white mb-3">
-                                    {frontProject.title}
-                                </h3>
-                                <p className="text-gray-400 text-sm mb-5 leading-relaxed">
-                                    {frontProject.description}
-                                </p>
-                                <div className="flex flex-wrap gap-2 mb-6">
-                                    {frontProject.tags.slice(0, 4).map(tag => (
-                                        <span key={tag} className="px-2 py-0.5 bg-slate-800 border border-slate-700 rounded-full text-xs text-gray-300">
-                                            {tag}
-                                        </span>
-                                    ))}
-                                </div>
-                                <p className="text-gray-600 text-xs">
-                                    Clique sur la carte pour passer au suivant →
-                                </p>
-                            </>
-                        ) : (
-                            <p className="text-gray-500">Aucun projet dans cette catégorie.</p>
-                        )}
-                    </div>
+            </div>
 
-                    {/* Côté droit — CardSwap */}
+            {/* Zone principale — full width pour permettre le débordement à droite */}
+            <div className="relative" style={{ paddingTop: '140px' }}>
+
+                <div className="max-w-6xl mx-auto px-6">
+                    {/* Rectangle de fond */}
                     <div
-                        className="absolute right-0 top-0 bottom-0 overflow-visible"
-                        style={{ width: '55%', height: '100%' }}
+                        className="relative flex items-stretch rounded-2xl bg-slate-900/70 border border-slate-700/50 overflow-visible"
+                        style={{ minHeight: '420px' }}
                     >
-                        {filteredProjects.length > 0 && (
-                            <CardSwap
-                                key={activeFilter}
-                                width={460}
-                                height={290}
-                                cardDistance={45}
-                                verticalDistance={50}
-                                delay={3500}
-                                pauseOnHover={true}
-                                skewAmount={4}
-                                easing="elastic"
-                                clickToAdvance={true}
-                                onCardChange={(newFrontIndex) => setFrontIndex(newFrontIndex)}
-                                containerClassName="absolute top-1/2 right-[-2%] -translate-y-1/2 perspective-[900px] overflow-visible"
-                            >
-                                {filteredProjects.map(project => (
-                                    <Card
-                                        key={project.id}
-                                        customClass="cursor-pointer border-slate-600 bg-slate-900"
-                                        onClick={() => {
-                                            if (project.github) {
-                                                window.open(project.github, '_blank', 'noopener noreferrer');
-                                            }
-                                        }}
-                                    >
-                                        <div className={`h-36 bg-gradient-to-br ${project.color} flex items-center justify-center relative`}>
-                                            <span className="text-5xl">{project.icons}</span>
-                                            <span className="absolute top-3 right-3 px-2 py-1 bg-black/30 backdrop-blur-sm rounded-full text-white text-xs font-medium">
-                                                {project.category}
+                        {/* ── Gauche : infos ── */}
+                        <div className="w-5/12 px-12 py-12 flex flex-col justify-center z-10 shrink-0">
+                            {frontProject ? (
+                                <>
+                                    <span className="text-xs font-semibold uppercase tracking-widest text-rose-400 mb-3">
+                                        {frontProject.category}
+                                    </span>
+                                    <h3 className="text-3xl font-bold text-white mb-4">
+                                        {frontProject.title}
+                                    </h3>
+                                    <p className="text-gray-400 text-sm mb-6 leading-relaxed">
+                                        {frontProject.description}
+                                    </p>
+                                    <div className="flex flex-wrap gap-2 mb-6">
+                                        {frontProject.tags.map(tag => (
+                                            <span key={tag} className="px-3 py-1 bg-slate-800 border border-slate-700 rounded-full text-xs text-gray-300">
+                                                {tag}
                                             </span>
-                                        </div>
-                                        <div className="px-5 pt-4 pb-3 flex items-start justify-between">
-                                            <div>
-                                                <h3 className="text-white font-bold text-base mb-1.5">{project.title}</h3>
-                                                <div className="flex flex-wrap gap-1.5">
-                                                    {project.tags.slice(0, 3).map(tag => (
-                                                        <span key={tag} className="px-2 py-0.5 bg-slate-800 rounded-full text-xs text-gray-400 border border-slate-700">
-                                                            {tag}
-                                                        </span>
-                                                    ))}
-                                                    {project.tags.length > 3 && (
-                                                        <span className="px-2 py-0.5 bg-slate-800 rounded-full text-xs text-gray-500 border border-slate-700">
-                                                            +{project.tags.length - 3}
-                                                        </span>
-                                                    )}
+                                        ))}
+                                    </div>
+                                    <p className="text-gray-600 text-xs">
+                                        Clique sur la carte pour passer au suivant →
+                                    </p>
+                                </>
+                            ) : (
+                                <p className="text-gray-500">Aucun projet dans cette catégorie.</p>
+                            )}
+                        </div>
+
+                        {/* ── Droite : ancrage CardSwap ── */}
+                        <div className="relative flex-1 overflow-visible">
+                            {filteredProjects.length > 0 && (
+                                <CardSwap
+                                    key={activeFilter}
+                                    width={CARD_W}
+                                    height={CARD_H}
+                                    cardDistance={60}
+                                    verticalDistance={70}
+                                    delay={3000}
+                                    pauseOnHover={true}
+                                    skewAmount={3}
+                                    easing="elastic"
+                                    clickToAdvance={true}
+                                    onCardChange={(i) => setFrontIndex(i)}
+                                    containerClassName="absolute bottom-0 right-0 translate-x-[40%] translate-y-[22%] perspective-[1400px] overflow-visible"
+                                >
+                                    {filteredProjects.map(project => (
+                                        <Card
+                                            key={project.id}
+                                            customClass="cursor-pointer border-slate-600 bg-slate-900"
+                                            onClick={() => {
+                                                if (project.github) {
+                                                    window.open(project.github, '_blank', 'noopener noreferrer');
+                                                }
+                                            }}
+                                        >
+                                            {/* Bannière gradient */}
+<div
+    className="relative overflow-hidden"
+    style={{ height: `${Math.round(CARD_H * 0.60)}px` }}
+>
+    {project.image ? (
+        <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover"
+        />
+    ) : (
+        // Fallback gradient si pas d'image
+        <div className={`w-full h-full bg-gradient-to-br ${project.color} flex items-center justify-center`}>
+            <span className="text-9xl">{project.icons}</span>
+        </div>
+    )}
+    <span className="absolute top-4 right-4 px-3 py-1 bg-black/30 backdrop-blur-sm rounded-full text-white text-sm font-medium">
+        {project.category}
+    </span>
+</div>
+
+                                            {/* Bas de carte */}
+                                            <div className="px-7 pt-5 pb-5 flex items-start justify-between">
+                                                <div>
+                                                    <h3 className="text-white font-bold text-xl mb-2">{project.title}</h3>
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {project.tags.slice(0, 3).map(tag => (
+                                                            <span key={tag} className="px-3 py-1 bg-slate-800 rounded-full text-xs text-gray-400 border border-slate-700">
+                                                                {tag}
+                                                            </span>
+                                                        ))}
+                                                        {project.tags.length > 3 && (
+                                                            <span className="px-3 py-1 bg-slate-800 rounded-full text-xs text-gray-500 border border-slate-700">
+                                                                +{project.tags.length - 3}
+                                                            </span>
+                                                        )}
+                                                    </div>
                                                 </div>
+                                                <span className={`text-2xl mt-1 ${project.github ? 'text-rose-400' : 'text-slate-600'}`}>
+                                                    {project.github ? '→' : '🔒'}
+                                                </span>
                                             </div>
-                                            <span className={`text-lg mt-1 ${project.github ? 'text-rose-400' : 'text-slate-600'}`}>
-                                                {project.github ? '→' : '🔒'}
-                                            </span>
-                                        </div>
-                                    </Card>
-                                ))}
-                            </CardSwap>
-                        )}
+                                        </Card>
+                                    ))}
+                                </CardSwap>
+                            )}
+                        </div>
+
                     </div>
                 </div>
-
             </div>
+
         </section>
     );
 }
