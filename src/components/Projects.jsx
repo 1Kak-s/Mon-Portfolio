@@ -53,7 +53,7 @@ function Projects() {
             description: "Projet de gestion de tâches avec React et Firebase.",
             tags: ["React", "Firebase", "JavaScript", "NestJS"],
             category: "Web Development",
-            icons: "",
+            image: "/src/assets/Projets/TF.png",
             color: "from-blue-400 to-blue-600",
             github: "https://github.com/1Kak-s/TaskForge",
         },
@@ -77,6 +77,17 @@ function Projects() {
             color: "from-orange-400 to-orange-600",
             github: "https://github.com/1Kak-s/MyGeneratorPrime",
         },
+
+        {
+            id: 8,
+            title: "Bot Telegram",
+            description: "Un bot Telegram pour automatiser des tâches et fournir des informations.",
+            tags: ["Telegram Bot API", "Python", "Automation"],
+            category: "Automation",
+            image: "/src/assets/Projets/bot.png",
+            color: "from-gray-500 to-gray-700",
+            github: "",
+        }
     ];
 
     const filters = [
