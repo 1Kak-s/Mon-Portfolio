@@ -83,7 +83,7 @@ function Projects() {
             id: 8,
             title: "My Generator Prime",
             description: "Un générateur de prime csv.",
-            tags: ["Go", "Game Development", "One piece", "CSV"],
+            tags: ["Go", "Game Development", "One piece", ""],
             category: "Game Development",
             image: "/src/assets/Projets/prime.png",
             color: "from-orange-400 to-orange-600",
