@@ -22,10 +22,11 @@ function Projects() {
             description: "Swagger et Postman pour documenter et tester des APIs REST. Avec un frontend React.",
             tags: ["Swagger", "Postman", "API", "Documentation", "REST", "React"],
             category: "Automation",
-            image: "",
+            image: "/src/assets/Projets/docproto.png",
             color: "from-orange-500 to-rose-600",
             github: "",
         },
+
         {
             id: 3,
             title: "EtnaFlix",
@@ -58,12 +59,12 @@ function Projects() {
         },
         {
             id: 6,
-            title: "Blue",
-            description: "Projet artistique d'un autoportrait.",
-            tags: ["Art", "Digital", "Creative", "Procreate"],
-            category: "Art",
-            icons: "",
-            color: "from-sky-400 to-blue-600",
+            title: "My Hyrule Castle",
+            description: "Proje de mini jeu rpg dans l'univers de Zelda. En GO",
+            tags: ["Go", "Game Development", "RPG", "Zelda"],
+            category: "Game Development",
+            image: "/src/assets/Projets/hyrule.png",
+            color: "from-green-500 to-green-700",
             github: "",
         },
         {
