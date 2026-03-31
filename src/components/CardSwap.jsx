@@ -96,11 +96,12 @@ const CardSwap = forwardRef(({
       tl.addLabel('return', `promote+=${config.durMove * config.returnDelay}`);
       tl.call(() => { gsap.set(elFront, { zIndex: backSlot.zIndex }); }, undefined, 'return');
       tl.to(elFront, { x: backSlot.x, y: backSlot.y, z: backSlot.z, duration: config.durReturn, ease: config.ease }, 'return');
-      tl.call(() => {
-        const newOrder = [...rest, front];
-        order.current = newOrder;
-        onCardChange?.(newOrder[0]);
-      });
+      tl.call(() => { onCardChange?.(rest[0]); }, undefined, 'promote');
+
+// Met à jour l'ordre seulement à la fin de l'animation
+tl.call(() => {
+  order.current = [...rest, front];
+});
     };
 
     swapRef.current = swap;
