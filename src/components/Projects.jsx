@@ -7,6 +7,7 @@ function Projects() {
     const [frontIndex, setFrontIndex] = useState(0);
     const cardSwapRef = useRef(null);
 
+    // 🚨 CORRECTION MAJEURE : Chemins des images passés en "/Projets/..."
     const projects = [
         {
             id: 1,
@@ -14,7 +15,7 @@ function Projects() {
             description: "Un outil de visualisation et d'analyse des abonnements.",
             category: "Data Visualization",
             tags: ["React", "Figma", "Tailwind CSS", "Data Visualization"],
-            image: "/src/assets/Projets/Subflow.jpg",
+            image: "/Projets/Subflow.jpg", 
             color: "from-purple-500 to-indigo-600",
             github: "",
         },
@@ -24,7 +25,7 @@ function Projects() {
             description: "Un jeu immersif d'un escaperoom en réalité virtuelle dans un musée.",
             category: "VR",
             tags: ["Unreal Engine", "C#", "Meta Quest", "VR"],
-            image: "/src/assets/Projets/musé.png",
+            image: "/Projets/muse.png", // 🚨 CORRIGÉ : AUCUN ACCENT DANS LE NOM DU FICHIER !
             color: "from-purple-500 to-indigo-600",
             github: "",
         },
@@ -34,7 +35,7 @@ function Projects() {
             description: "Swagger et Postman pour documenter et tester des APIs REST. Avec un frontend React.",
             tags: ["Swagger", "Postman", "API", "Documentation", "REST", "React"],
             category: "Automation",
-            image: "/src/assets/Projets/docproto.png",
+            image: "/Projets/docproto.png",
             color: "from-orange-500 to-rose-600",
             github: "https://github.com/1Kak-s/Documentation-protocolaire",
         },
@@ -44,7 +45,7 @@ function Projects() {
             description: "Projet de plateforme de liste de films avec React et API externe.",
             tags: ["React", "NestJS", "TypeScript", "API"],
             category: "Web Development",
-            image: "/src/assets/Projets/etflix.png",
+            image: "/Projets/etflix.png",
             color: "from-cyan-500 to-blue-600",
             github: "",
         },
@@ -54,7 +55,7 @@ function Projects() {
             description: "Création de sites web professionnels avec thèmes personnalisés et plugins.",
             tags: ["WordPress", "PHP", "CSS", "SEO"],
             category: "Web Development",
-            image: "/src/assets/Projets/MGSTUDIO.png",
+            image: "/Projets/MGSTUDIO.png",
             color: "from-green-500 to-teal-600",
             github: "",
         },
@@ -64,7 +65,7 @@ function Projects() {
             description: "Projet de gestion de tâches avec React et Firebase.",
             tags: ["React", "Firebase", "JavaScript", "NestJS"],
             category: "Web Development",
-            image: "/src/assets/Projets/TF.png",
+            image: "/Projets/TF.png",
             color: "from-blue-400 to-blue-600",
             github: "https://github.com/1Kak-s/TaskForge",
         },
@@ -74,7 +75,7 @@ function Projects() {
             description: "Projet de mini jeu rpg dans l'univers de Zelda. En GO",
             tags: ["Go", "Game Development", "RPG", "Zelda"],
             category: "Game Development",
-            image: "/src/assets/Projets/hyrule.png",
+            image: "/Projets/hyrule.png",
             color: "from-green-500 to-green-700",
             github: "https://github.com/1Kak-s/The-Hyrule-Castle",
         },
@@ -84,7 +85,7 @@ function Projects() {
             description: "Un générateur de prime csv.",
             tags: ["Go", "Game Development", "One piece"],
             category: "Game Development",
-            image: "/src/assets/Projets/prime.png",
+            image: "/Projets/prime.png",
             color: "from-orange-400 to-orange-600",
             github: "https://github.com/1Kak-s/MyGeneratorPrime",
         },
@@ -94,7 +95,7 @@ function Projects() {
             description: "Un bot Telegram pour automatiser des tâches et fournir des informations.",
             tags: ["Telegram Bot API", "Python", "Automation"],
             category: "Automation",
-            image: "/src/assets/Projets/bot.png",
+            image: "/Projets/bot.png",
             color: "from-gray-500 to-gray-700",
             github: "",
         },
@@ -105,14 +106,15 @@ function Projects() {
         { id: "VR", label: "Réalité Virtuelle" },
         { id: "Automation", label: "Automatisation" },
         { id: "Web Development", label: "Développement Web" },
-        { id: "Art", label: "Art" },
+        { id: "Art", label: "Art" }, // Note: aucun projet n'a la catégorie "Art" pour l'instant
     ];
 
     const filteredProjects = activeFilter === "all"
         ? projects
         : projects.filter(p => p.category === activeFilter);
 
-    const frontProject = filteredProjects[frontIndex] ?? filteredProjects[0];
+    // Sécurité: Si on filtre sur une catégorie vide, frontProject sera null
+    const frontProject = filteredProjects[frontIndex] ?? filteredProjects[0] ?? null;
 
     const handleFilterChange = (id) => {
         setActiveFilter(id);
@@ -143,7 +145,7 @@ function Projects() {
                             onClick={() => handleFilterChange(filter.id)}
                             className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
                                 activeFilter === filter.id
-                                    ? 'bg-rose-500 text-white'
+                                    ? 'bg-rose-500 text-white shadow-lg shadow-rose-500/30' // Petit glow sur le bouton actif
                                     : 'bg-slate-700 text-gray-400 hover:bg-slate-600'
                             }`}>
                             {filter.label}
@@ -152,39 +154,43 @@ function Projects() {
                 </div>
 
                 {/* MOBILE : grille simple */}
-                <div className="md:hidden grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {filteredProjects.map(project => (
-                        <div
-                            key={project.id}
-                            onClick={() => project.github && window.open(project.github, '_blank', 'noopener noreferrer')}
-                            className={`bg-slate-900 rounded-2xl overflow-hidden border border-slate-700 ${project.github ? 'cursor-pointer hover:border-rose-500/50 transition-colors' : ''}`}
-                        >
-                            <div className="relative h-44 overflow-hidden">
-                                {project.image ? (
-                                    <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
-                                ) : (
-                                    <div className={`w-full h-full bg-gradient-to-br ${project.color}`} />
-                                )}
-                                <span className="absolute top-3 right-3 px-2 py-0.5 bg-black/40 backdrop-blur-sm rounded-full text-white text-xs font-medium">
-                                    {project.category}
-                                </span>
-                            </div>
-                            <div className="p-5">
-                                <h3 className="text-white font-bold text-lg mb-1">{project.title}</h3>
-                                <p className="text-gray-400 text-sm mb-3 line-clamp-2">{project.description}</p>
-                                <div className="flex flex-wrap gap-1.5">
-                                    {project.tags.slice(0, 3).map(tag => (
-                                        <span key={tag} className="px-2 py-0.5 bg-slate-800 rounded-full text-xs text-gray-400 border border-slate-700">{tag}</span>
-                                    ))}
-                                    {project.tags.length > 3 && (
-                                        <span className="px-2 py-0.5 bg-slate-800 rounded-full text-xs text-gray-500 border border-slate-700">+{project.tags.length - 3}</span>
+                {filteredProjects.length === 0 ? (
+                    <div className="text-center text-gray-500 py-10 md:hidden">Aucun projet dans cette catégorie pour le moment.</div>
+                ) : (
+                    <div className="md:hidden grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        {filteredProjects.map(project => (
+                            <div
+                                key={project.id}
+                                onClick={() => project.github && window.open(project.github, '_blank', 'noopener noreferrer')}
+                                className={`bg-slate-900 rounded-2xl overflow-hidden border border-slate-700 ${project.github ? 'cursor-pointer hover:border-rose-500/50 transition-colors' : ''}`}
+                            >
+                                <div className="relative h-44 overflow-hidden">
+                                    {project.image ? (
+                                        <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+                                    ) : (
+                                        <div className={`w-full h-full bg-gradient-to-br ${project.color}`} />
                                     )}
+                                    <span className="absolute top-3 right-3 px-2 py-0.5 bg-black/40 backdrop-blur-sm rounded-full text-white text-xs font-medium">
+                                        {project.category}
+                                    </span>
                                 </div>
-                                {project.github && <p className="text-rose-400 text-xs mt-3 font-medium">Voir le projet</p>}
+                                <div className="p-5">
+                                    <h3 className="text-white font-bold text-lg mb-1">{project.title}</h3>
+                                    <p className="text-gray-400 text-sm mb-3 line-clamp-2">{project.description}</p>
+                                    <div className="flex flex-wrap gap-1.5">
+                                        {project.tags.slice(0, 3).map(tag => (
+                                            <span key={tag} className="px-2 py-0.5 bg-slate-800 rounded-full text-xs text-gray-400 border border-slate-700">{tag}</span>
+                                        ))}
+                                        {project.tags.length > 3 && (
+                                            <span className="px-2 py-0.5 bg-slate-800 rounded-full text-xs text-gray-500 border border-slate-700">+{project.tags.length - 3}</span>
+                                        )}
+                                    </div>
+                                    {project.github && <p className="text-rose-400 text-xs mt-3 font-medium">Voir le projet</p>}
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                )}
             </div>
 
             {/* DESKTOP : CardSwap */}
@@ -216,16 +222,18 @@ function Projects() {
                                     </div>
                                     {/* Bouton suivant + lien GitHub */}
                                     <div className="flex items-center gap-4">
-                                        <button
-                                            onClick={() => cardSwapRef.current && cardSwapRef.current.next()}
-                                            className="flex items-center gap-2 px-5 py-2 rounded-full border border-slate-600 text-gray-400 hover:text-white hover:border-rose-500/60 hover:bg-rose-500/10 transition-all duration-300 text-sm group"
-                                        >
-                                            <span>Projet suivant</span>
-                                            <span className="group-hover:translate-x-1 transition-transform duration-200">{'→'}</span>
-                                        </button>
+                                        {/* On affiche le bouton "Suivant" uniquement s'il y a plus d'1 projet */}
+                                        {filteredProjects.length > 1 && (
+                                            <button
+                                                onClick={() => cardSwapRef.current && cardSwapRef.current.next()}
+                                                className="flex items-center gap-2 px-5 py-2 rounded-full border border-slate-600 text-gray-400 hover:text-white hover:border-rose-500/60 hover:bg-rose-500/10 transition-all duration-300 text-sm group"
+                                            >
+                                                <span>Projet suivant</span>
+                                                <span className="group-hover:translate-x-1 transition-transform duration-200">{'→'}</span>
+                                            </button>
+                                        )}
                                         {frontProject.github && (
-                                            
-                                                <a href={frontProject.github}
+                                            <a href={frontProject.github}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="flex items-center gap-2 px-5 py-2 rounded-full bg-rose-500 hover:bg-rose-600 text-white transition-all duration-300 text-sm font-medium"
@@ -236,7 +244,7 @@ function Projects() {
                                     </div>
                                 </>
                             ) : (
-                                <p className="text-gray-500">Aucun projet dans cette catégorie.</p>
+                                <p className="text-gray-500 text-lg">Aucun projet dans cette catégorie.</p>
                             )}
                         </div>
 
@@ -260,7 +268,7 @@ function Projects() {
                                     {filteredProjects.map(project => (
                                         <Card
                                             key={project.id}
-                                            customClass="cursor-pointer"
+                                            customClass={project.github ? "cursor-pointer" : "cursor-default"}
                                             onClick={() => {
                                                 if (project.github) {
                                                     window.open(project.github, '_blank', 'noopener noreferrer');
