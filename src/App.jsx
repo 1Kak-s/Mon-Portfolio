@@ -5,7 +5,7 @@ import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Experience from "./components/Experience";
 import Contact from "./components/Contact";
-import MagicBento from "./components/MagicBento";
+/* import MagicBento from "./components/MagicBento"; */
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         <Hero />
         <About />
         <Skills />
-        <MagicBento />
+        {/* <MagicBento /> */}
         <Projects />
         <Experience />
         <Contact />
