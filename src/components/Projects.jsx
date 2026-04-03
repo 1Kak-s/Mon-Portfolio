@@ -317,7 +317,7 @@ function Projects() {
                                                         </div>
                                                     </div>
                                                     <span className={`text-2xl mt-1 ${project.github ? 'text-rose-400' : 'text-slate-600'}`}>
-                                                        {project.github ? '→' : '🔒'}
+                                                        {project.github ? '→' : ''}
                                                     </span>
                                                 </div>
                                             </BorderGlow>
