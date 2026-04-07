@@ -92,7 +92,7 @@ return (
         <div className="space-y-8">
             <h3 className="text-2xl font-bold text-white">Restons en contact</h3>
             <p className="text-gray-400">
-            Je suis actuellement à la recherche d'une alternance en développement web pour septembre 2025. N'hésitez pas à me contacter !
+            Je suis actuellement à la recherche d'une alternance en développement web pour septembre 2026. N'hésitez pas à me contacter !
             </p>
 
             <div className="space-y-4">
