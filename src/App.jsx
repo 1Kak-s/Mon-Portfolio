@@ -8,7 +8,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Skills from "./components/Skills";
-import Projectss from "./components/Projectss";
+import Projects from "./components/Projects";
 import Experience from "./components/Experience";
 import Contact from "./components/Contact";
 import CustomCursor from "./components/CustomCursor";
@@ -45,7 +45,7 @@ function App() {
                         <Hero />
                         <About />
                         <Skills />
-                        <Projectss />
+                        <Projects />
                         <Experience />
                         <Contact />
                     </main>
