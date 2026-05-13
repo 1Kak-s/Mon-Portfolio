@@ -68,6 +68,7 @@ function CustomCursor() {
             {/* Petit point central - suit la souris sans délai */}
             <div
                 ref={dotRef}
+                className="custom-cursor-inner"
                 style={{
                     position: "fixed",
                     top: -5,
@@ -84,6 +85,7 @@ function CustomCursor() {
             {/* Anneau extérieur - suit avec un léger délai */}
             <div
                 ref={ringRef}
+                className="custom-cursor-outer"
                 style={{
                     position: "fixed",
                     top: -18,

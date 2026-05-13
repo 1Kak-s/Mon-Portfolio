@@ -15,9 +15,10 @@
 //  - Mobile : sphère en haut, tuiles en dessous
 // ============================================================
 
+import { Suspense, lazy } from 'react'
 import { motion } from 'framer-motion'
 import ScrollReveal from './ScrollReveal'
-import SkillsConstellation from './SkillsConstellation'
+const SkillsConstellation = lazy(() => import('./SkillsConstellation'))
 
 // Logos Simple Icons
 import {
@@ -123,7 +124,13 @@ function Skills() {
                     {/* order-1 sur mobile (en premier visuellement)
                         order-2 sur desktop (à droite dans le grid) */}
                     <div className="order-1 lg:order-2">
-                        <SkillsConstellation />
+                        <Suspense fallback={
+                            <div className="flex items-center justify-center h-[420px] text-slate-500 text-sm">
+                                Chargement de la constellation 3D...
+                            </div>
+                        }>
+                            <SkillsConstellation />
+                        </Suspense>
                     </div>
                 </div>
 

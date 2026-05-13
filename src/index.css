@@ -43,3 +43,11 @@ body {
   background: #f43f5e;
 }
 
+
+/* Désactiver le curseur custom sur écrans tactiles */
+@media (hover: none) and (pointer: coarse) {
+    .custom-cursor-outer,
+    .custom-cursor-inner {
+        display: none !important;
+    }
+}
