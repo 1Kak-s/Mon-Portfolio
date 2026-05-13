@@ -1,6 +1,6 @@
-
-// CONTACT.JSX — avec ScrollReveal 
-
+// ============================================================
+// CONTACT.JSX — avec ScrollReveal (amélioration #1)
+// ============================================================
 
 import { useState } from 'react'
 import emailjs from '@emailjs/browser'
@@ -55,7 +55,7 @@ function Contact() {
 
                 <div className="grid md:grid-cols-2 gap-12">
 
-                    {/* Infos  arrive depuis la gauche */}
+                    {/* Infos — arrive depuis la gauche */}
                     <ScrollReveal direction="left" delay={0.1}>
                         <div className="space-y-8">
                             <h3 className="text-2xl font-bold text-white">Restons en contact</h3>
@@ -92,7 +92,7 @@ function Contact() {
                         </div>
                     </ScrollReveal>
 
-                    {/* Formulaire  arrive depuis la droite */}
+                    {/* Formulaire — arrive depuis la droite */}
                     <ScrollReveal direction="right" delay={0.2}>
                         <form onSubmit={handleSubmit} className="space-y-6">
                             {submitStatus === 'success' && (

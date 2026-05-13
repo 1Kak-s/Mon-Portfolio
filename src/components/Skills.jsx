@@ -1,5 +1,23 @@
+// ============================================================
+// SKILLS.JSX — Layout split : tuiles à gauche, constellation 3D à droite
+// ============================================================
+// Plus de toggle ni de filtres : on affiche tout, tout le temps.
+// La constellation 3D reste constamment visible à droite,
+// et la liste exhaustive des techs est dans une grille à gauche.
+//
+// Pourquoi ce layout ?
+//  - Lisibilité immédiate (pas besoin de cliquer pour voir les techs)
+//  - Effet "wow" garanti grâce à la 3D toujours présente
+//  - Cohérence visuelle entre les 2 colonnes (mêmes logos, même couleurs)
+//
+// Responsive :
+//  - Desktop : grid 2 colonnes (1fr / 1fr) avec 80px d'écart
+//  - Mobile : sphère en haut, tuiles en dessous
+// ============================================================
+
 import { motion } from 'framer-motion'
 import ScrollReveal from './ScrollReveal'
+import SkillsConstellation from './SkillsConstellation'
 
 // Logos Simple Icons
 import {
@@ -64,34 +82,49 @@ function Skills() {
                     </p>
                 </ScrollReveal>
 
-                {/* ═══ Grille des tuiles ═══ */}
-                <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 mb-16">
-                    {skills.map((skill, i) => (
-                        <motion.div
-                            key={skill.name}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.2 }}
-                            transition={{
-                                delay: i * 0.04,
-                                duration: 0.4,
-                                ease: [0.22, 1, 0.36, 1],
-                            }}
-                            whileHover={{
-                                y: -4,
-                                transition: { type: 'spring', stiffness: 400 },
-                            }}
-                            className="group flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-slate-800 border border-slate-700 hover:border-rose-500/50 cursor-default transition-colors min-h-[90px]"
-                        >
-                            <skill.Icon
-                                className="w-7 h-7 transition-transform group-hover:scale-110"
-                                style={{ color: skill.color }}
-                            />
-                            <span className="text-xs font-medium text-gray-300 group-hover:text-white transition-colors text-center leading-tight">
-                                {skill.name}
-                            </span>
-                        </motion.div>
-                    ))}
+                {/* ═══ SPLIT LAYOUT : tuiles | constellation ═══ */}
+                {/* gap-12 sur mobile, gap-20 (80px) sur desktop = beaucoup d'air entre les colonnes */}
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-16">
+
+                    {/* ── COLONNE GAUCHE : grille des tuiles ─────────── */}
+                    <div className="order-2 lg:order-1">
+                        {/* Grille 3 colonnes : 6 lignes de 3 tuiles = 18 techs */}
+                        <div className="grid grid-cols-3 gap-3">
+                            {skills.map((skill, i) => (
+                                <motion.div
+                                    key={skill.name}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, amount: 0.2 }}
+                                    transition={{
+                                        delay: i * 0.04,
+                                        duration: 0.4,
+                                        ease: [0.22, 1, 0.36, 1],
+                                    }}
+                                    whileHover={{
+                                        y: -4,
+                                        transition: { type: 'spring', stiffness: 400 },
+                                    }}
+                                    className="group flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-slate-800 border border-slate-700 hover:border-rose-500/50 cursor-default transition-colors min-h-[90px]"
+                                >
+                                    <skill.Icon
+                                        className="w-7 h-7 transition-transform group-hover:scale-110"
+                                        style={{ color: skill.color }}
+                                    />
+                                    <span className="text-xs font-medium text-gray-300 group-hover:text-white transition-colors text-center leading-tight">
+                                        {skill.name}
+                                    </span>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* ── COLONNE DROITE : constellation 3D grande ────── */}
+                    {/* order-1 sur mobile (en premier visuellement)
+                        order-2 sur desktop (à droite dans le grid) */}
+                    <div className="order-1 lg:order-2">
+                        <SkillsConstellation />
+                    </div>
                 </div>
 
                 {/* ═══ SOFT SKILLS (en bas, séparés) ═══ */}

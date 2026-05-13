@@ -1,4 +1,20 @@
-
+// ============================================================
+// EXPERIENCE.JSX — Timeline verticale scroll-driven (GSAP)
+// ============================================================
+// Pattern "split screen + sticky + scroll-triggered" :
+//  - Colonne gauche STICKY : panneau visuel qui change selon l'exp. active
+//    (chapitre, storytelling, logo géant, description...)
+//  - Colonne droite : chaque expérience = une section full-height
+//    qui devient "active" quand elle passe au centre du viewport
+//  - Ligne verticale rose qui se remplit avec la progression du scroll
+//  - Animations GSAP : fade in/out, scale, pulse sur les points actifs
+//
+// Pourquoi GSAP et pas du CSS pur ?
+//  - ScrollTrigger permet d'associer finement le scroll à des timelines
+//  - gsap.context() gère le cleanup auto au démontage du composant
+//  - Les easings custom (power2.out, back.out) donnent un feeling pro
+//    qu'on ne peut pas reproduire avec des transitions CSS seules
+// ============================================================
 
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
@@ -51,10 +67,11 @@ function Experience() {
     // Index du chapitre actuellement "actif" (passé au centre du viewport)
     const [activeIndex, setActiveIndex] = useState(0)
 
-    //  Effet GSAP : scroll-driven animations 
-    
+    // ── Effet GSAP : scroll-driven animations ────────────────
+    // useGSAP = version React officielle de gsap.context() qui auto-cleanup
     useGSAP(() => {
-    
+        // 1. La ligne rose qui se remplit avec le scroll
+        //    - Scrub: 0.5 = lag léger pour un feeling fluide (la ligne "suit" le scroll avec inertie)
         gsap.to(lineFillRef.current, {
             scaleY: 1,
             ease: 'none',
@@ -66,8 +83,8 @@ function Experience() {
             },
         })
 
-        //  Détection du chapitre actif : chaque step a son propre ScrollTrigger
-        //    
+        // 2. Détection du chapitre actif : chaque step a son propre ScrollTrigger
+        //    - Quand le milieu du step passe au milieu du viewport → il devient actif
         stepsRef.current.forEach((step, i) => {
             ScrollTrigger.create({
                 trigger: step,
@@ -79,14 +96,14 @@ function Experience() {
         })
     }, { scope: sectionRef })
 
-    // Effet : anime la colonne gauche quand activeIndex change ─
+    // ── Effet : anime la colonne gauche quand activeIndex change ─
     useEffect(() => {
         const panel = panelsRef.current[activeIndex]
         if (!panel) return
 
         // Timeline d'entrée du panneau actif :
-        
-        
+        // 1) fade in + scale du logo (feeling "pop" avec back.out)
+        // 2) stagger sur le texte (chapitre, période, company, role, desc apparaissent un après l'autre)
         const tl = gsap.timeline()
         tl.fromTo(
             panel.querySelector('.xp-logo-big'),
@@ -183,7 +200,7 @@ function Experience() {
                         </div>
                     </div>
 
-                    {/* COLONNE DROITE : steps full-height avec ligne verticale  */}
+                    {/* ═══ COLONNE DROITE : steps full-height avec ligne verticale ═══ */}
                     <div className="relative">
                         {/* Ligne verticale background (gris) */}
                         <div className="absolute left-[14px] top-0 bottom-0 w-0.5 bg-slate-700" />
@@ -238,7 +255,7 @@ function Experience() {
                                     </p>
                                 </div>
 
-                                {/* Sur MOBILE : pas de split, affiche tout le contenu directement
+                                {/* Sur MOBILE : pas de split, on affiche tout le contenu directement
                                     (car le panneau sticky gauche est caché via hidden md:block) */}
                                 <div className="md:hidden bg-slate-800 rounded-xl p-5 border border-slate-700">
                                     <div className="flex items-center gap-4 mb-4">

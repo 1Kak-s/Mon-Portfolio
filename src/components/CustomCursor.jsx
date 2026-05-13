@@ -1,3 +1,15 @@
+// ============================================================
+// 🖱️ AMÉLIORATION #5 : CURSEUR CUSTOM GSAP
+// ============================================================
+// Ce composant remplace le curseur par défaut du navigateur.
+// Il utilise GSAP pour animer deux cercles qui suivent la souris :
+//  - Un petit point (réactif instantané)
+//  - Un anneau plus grand (qui suit avec un léger délai = effet "lag")
+//
+// Le curseur change de taille au survol des éléments interactifs
+// grâce aux événements mouseenter/mouseleave globaux.
+// ============================================================
+
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
@@ -9,18 +21,18 @@ function CustomCursor() {
         const dot  = dotRef.current;
         const ring = ringRef.current;
 
-        //  Masquer le curseur natif 
+        // --- Masquer le curseur natif ---
         document.body.style.cursor = "none";
 
-        // Suivi de la souris
+        // ── Suivi de la souris ───────────────────────────────────────
         // Le "dot" suit instantanément (duration: 0)
-        // Le "ring" suit avec un léger délai (duration: 0.35)  effet lag
+        // Le "ring" suit avec un léger délai (duration: 0.35) → effet lag
         const onMove = ({ clientX: x, clientY: y }) => {
             gsap.to(dot,  { x, y, duration: 0,    ease: "none" });
             gsap.to(ring, { x, y, duration: 0.35, ease: "power2.out" });
         };
 
-        // Agrandissement au survol des éléments cliquables 
+        // ── Agrandissement au survol des éléments cliquables ─────────
         const onEnter = () => {
             gsap.to(dot,  { scale: 0, duration: 0.2 });
             gsap.to(ring, { scale: 2.5, borderColor: "#f43f5e", duration: 0.3, ease: "back.out(2)" });
@@ -31,7 +43,7 @@ function CustomCursor() {
             gsap.to(ring, { scale: 1, borderColor: "rgba(244,63,94,0.6)", duration: 0.3 });
         };
 
-        // Cible tous les éléments interactifs 
+        // ── Cible tous les éléments interactifs ──────────────────────
         const interactives = document.querySelectorAll("a, button, [data-cursor]");
         interactives.forEach(el => {
             el.addEventListener("mouseenter", onEnter);
@@ -40,7 +52,7 @@ function CustomCursor() {
 
         window.addEventListener("mousemove", onMove);
 
-        //  Nettoyage quand le composant se démonte 
+        // ── Nettoyage quand le composant se démonte ───────────────────
         return () => {
             document.body.style.cursor = "auto";
             window.removeEventListener("mousemove", onMove);
@@ -53,7 +65,7 @@ function CustomCursor() {
 
     return (
         <>
-            {/* Petit point central suit la souris sans délai */}
+            {/* Petit point central - suit la souris sans délai */}
             <div
                 ref={dotRef}
                 style={{
@@ -64,12 +76,12 @@ function CustomCursor() {
                     height: 10,
                     borderRadius: "50%",
                     background: "#f43f5e",
-                    pointerEvents: "none",   //  ne bloque pas les clics
+                    pointerEvents: "none",   // ← important : ne bloque pas les clics
                     zIndex: 99999,
-                    willChange: "transform", 
+                    willChange: "transform", // ← optimisation GPU
                 }}
             />
-            {/* Anneau extérieur suit avec un léger délai */}
+            {/* Anneau extérieur - suit avec un léger délai */}
             <div
                 ref={ringRef}
                 style={{

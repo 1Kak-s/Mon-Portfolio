@@ -1,3 +1,18 @@
+// ============================================================
+// 🚀 AMÉLIORATION #2 : ANIMATIONS D'ENTRÉE DU HERO (GSAP)
+// ============================================================
+// On utilise useGSAP (hook officiel @gsap/react) pour animer
+// les éléments du Hero au chargement de la page.
+//
+// Le principe : chaque élément part invisible (opacity:0, y:40)
+// et arrive en fondu+glissement vers le haut, en cascade (stagger).
+//
+// useGSAP est préféré à useEffect + gsap car il :
+//  ✅ nettoie automatiquement les animations au unmount
+//  ✅ s'intègre proprement avec React 18 Strict Mode
+//  ✅ gère le scope pour cibler uniquement les éléments du composant
+// ============================================================
+
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";

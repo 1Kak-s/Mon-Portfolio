@@ -1,5 +1,12 @@
+// ============================================================
+// ABOUT.JSX — avec ScrollReveal (amélioration #1)
+// ============================================================
+// On remplace l'animation de mot basique par une version GSAP
+// et on enveloppe les blocs dans <ScrollReveal> pour qu'ils
+// apparaissent proprement au scroll.
+// ============================================================
+
 import { useState, useEffect, useRef } from "react";
-// eslint-disable-next-line no-unused-vars
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -13,8 +20,9 @@ function About() {
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
     const wordRef = useRef(null);
 
-    // ── Animation GSAP du mot qui change 
-    
+    // ── Animation GSAP du mot qui change ─────────────────────────
+    // Chaque fois que currentWordIndex change, on anime le mot
+    // avec un flip vertical (rotateX) au lieu d'un simple swap
     useEffect(() => {
         if (wordRef.current) {
             // Animation d'entrée (de haut vers position normale)
@@ -58,7 +66,7 @@ function About() {
 
                 <div className="grid md:grid-cols-2 gap-12 items-center">
 
-                    {/* Photo  arrive depuis la gauche */}
+                    {/* Photo — arrive depuis la gauche */}
                     <ScrollReveal direction="left">
                         <div className="relative">
                             <div className="w-64 h-64 md:w-80 md:h-80 mx-auto relative">
@@ -69,7 +77,7 @@ function About() {
                         </div>
                     </ScrollReveal>
 
-                    {/* Texte  arrive depuis la droite */}
+                    {/* Texte — arrive depuis la droite */}
                     <ScrollReveal direction="right" delay={0.1}>
     <div className="space-y-6">
         <p className="text-gray-300 text-lg leading-relaxed">
